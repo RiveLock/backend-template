@@ -5,10 +5,10 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/template?characterEncoding=utf-8
     username: root
-    password: 67819127
+    password: root
 
 # mybatis
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mybatis-mappers/*.xml
+  config-location: classpath:mybatis-config.xml.xml
 
