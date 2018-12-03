@@ -3,12 +3,12 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/template?characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/template?characterEncoding=utf-8&autoReconnect=true&useSSL=false
     username: root
     password: root
 
 # mybatis
 mybatis:
   mapper-locations: classpath*:mybatis-mappers/*.xml
-  config-location: classpath:mybatis-config.xml.xml
+  config-location: classpath:mybatis-config.xml
 

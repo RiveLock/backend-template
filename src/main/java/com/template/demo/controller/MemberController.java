@@ -118,7 +118,7 @@ public class MemberController {
 
         templateMemberDao.update(member);
 
-        return "register success";
+        return "motify password success";
     }
 
 }
