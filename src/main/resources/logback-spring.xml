@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="logFile" value="/data/logs/template/demo.log"/>
+    <property name="logFile" value="f:/data/logs/template/demo.log"/>
 
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${logFile}</file>
