@@ -14,8 +14,5 @@
         <setting name="defaultStatementTimeout" value="25000"/>
     </settings>
 
-    <typeAliases>
-        <package name="com.template.demo.base.domain"/>
-    </typeAliases>
 
 </configuration>

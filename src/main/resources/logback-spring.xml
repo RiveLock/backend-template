@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="logFile" value="/data/logs/template/demo.log"/>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logFile}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${logFile}.%d{yyyy-MM-dd}</fileNamePattern>
+            <!-- keep 3 days' worth of history capped at 3GB total size -->
+            <maxHistory>3</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>[traceId:%X{X-B3-TraceId},span_id:%X{X-B3-SpanId}] [%-5level] [%d] [%thread] [%C{0}.java:%L] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ch.qos.logback.core.ConsoleAppender 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>false</withJansi>
+        <encoder>
+            <pattern>[traceId:%X{X-B3-TraceId},span_id:%X{X-B3-SpanId}] [%thread] %d{HH:mm:ss.SSS} %highlight(%-5level) %cyan(%logger{36}) - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="pro, test">
+        <root level="info">
+            <appender-ref ref="file"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <root level="debug">
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
+
+</configuration>
