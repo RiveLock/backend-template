@@ -1,0 +1,22 @@
+# database
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/template?characterEncoding=utf-8&autoReconnect=true&useSSL=false
+    username: root
+    password: 123456
+    max-active: 50
+    initial-size: 10
+    max-wait: 60000
+    max-idle: 20
+    min-idle: 10
+    validation-query: select 1
+    test-while-idle: true
+    test-on-borrow: true
+    test-on-return: false
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+
+    session:
+      store-type: none
