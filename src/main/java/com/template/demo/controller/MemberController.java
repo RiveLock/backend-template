@@ -4,6 +4,8 @@ import com.template.demo.base.dao.TemplateMemberDao;
 import com.template.demo.base.domain.TemplateMember;
 import com.template.demo.base.domain.criteria.TemplateMemberCriteria;
 import com.template.demo.base.dto.TemplateMemberDto;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.Date;
 /**
  * Created jixinshi on 2018-11-27.
  */
+@Api("用户信息 接口")
 @RequestMapping(value = "/member")
 @RestController
 public class MemberController {
@@ -32,6 +35,7 @@ public class MemberController {
      * @param memberDto
      * @return
      */
+    @ApiOperation(value = "登陆用户")
     @PostMapping(value = "/login/user")
     public String loginUser(@RequestBody @NotNull TemplateMemberDto memberDto){
 
@@ -58,6 +62,7 @@ public class MemberController {
      * @param memberDto
      * @return
      */
+    @ApiOperation(value = "添加用户")
     @PostMapping(value = "/add/user")
     public String addUser(@RequestBody @NotNull TemplateMemberDto memberDto){
 
@@ -89,6 +94,7 @@ public class MemberController {
      * @param memberDto
      * @return
      */
+    @ApiOperation(value = "修改用户")
     @PutMapping(value = "/motify/user")
     public String motifyUser(@RequestBody @NotNull TemplateMemberDto memberDto){
 
