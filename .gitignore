@@ -45,3 +45,6 @@ tmp/
 .classpath
 .loadpath
 /target/
+
+
+logFile*

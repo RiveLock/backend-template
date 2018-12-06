@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="logFile" value="f:/data/logs/template/demo.log"/>
+    <!--<property name="logFile" value="f:/data/logs/template/demo.log"/>-->
 
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${logFile}</file>
+        <file>${logPath}/demo.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>${logFile}.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>${logPath}/demo-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- keep 3 days' worth of history capped at 3GB total size -->
             <maxHistory>3</maxHistory>
             <totalSizeCap>3GB</totalSizeCap>
