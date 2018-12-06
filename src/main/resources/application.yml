@@ -1,32 +1,18 @@
-# database
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/template?characterEncoding=utf-8&autoReconnect=true&useSSL=false
-    username: root
-    password: root
-    max-active: 50
-    initial-size: 10
-    max-wait: 60000
-    max-idle: 20
-    min-idle: 10
-    validation-query: select 1
-    test-while-idle: true
-    test-on-borrow: true
-    test-on-return: false
-    time-between-eviction-runs-millis: 60000
-    min-evictable-idle-time-millis: 300000
-
-    session:
-      store-type: none
+  # 选择加载不同环境的配置文件
+  profiles:
+    active: dev
 
 # mybatis
 mybatis:
   mapper-locations: classpath:mybatis-mappers/*.xml
-  config-location: classpath:mybatis-config.xml
+  configuration:
+    cache-enabled: true  #全局映射器启用缓存
+    use-column-label: true  # 允许使用列标签代替列名
+    default-statement-timeout: 25000 #数据库超过25000秒仍未响应则超时
+    multiple-result-sets-enabled: true #对于未知的SQL查询，允许返回不同的结果集以达到通用的效果
 
 # log config, 注意（Spring boot documentation recommends to use logback-spring.xml rather than logback.xml and in it you can use spring profile tag）
 # https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-logging.html
-logging:
-  config: classpath:logback-spring.xml
+#logging:
+#  config: classpath:logback-spring.xml
