@@ -17,6 +17,8 @@ import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +35,8 @@ import java.util.Date;
 @RestController
 @Slf4j
 public class MemberController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MemberController.class);
 
     @Resource
     private TemplateMemberDao templateMemberDao;
@@ -67,12 +71,12 @@ public class MemberController {
 
         try{
             subject.login(token);
-            log.info(userName+"登入系统");
+            LOGGER.info(userName+"登入系统");
         }catch (UnknownAccountException e) {
-            log.error(userName+"账号不存在");
+            LOGGER.error(userName+"账号不存在");
             return ResultData.error(Error.USERNAME_NOT_EXIST.code,Error.USERNAME_NOT_EXIST.description);
         }catch (AuthenticationException e){
-            log.error(userName+"密码错误");
+            LOGGER.error(userName+"密码错误");
             return ResultData.error(Error.USER_PASSWORD_FAIL.code,Error.USER_PASSWORD_FAIL.description);
         }
         return ResultData.success(Success.USER_LOGIN_SUCCESS.code,Success.USER_LOGIN_SUCCESS.description);
