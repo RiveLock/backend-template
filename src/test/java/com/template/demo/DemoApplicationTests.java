@@ -1,6 +1,7 @@
 package com.template.demo;
 
 
+import com.template.demo.utils.DigestUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -26,11 +27,9 @@ public class DemoApplicationTests {
 
     @Test
     public void redisTest() {
-        //redisTemplate.opsForValue().set("qq", "123");
-        stringRedisTemplate.opsForValue().set("qq","123");
-        String key = stringRedisTemplate.opsForValue().get("qq");
-        logger.info(key);
-        //System.out.println(key);
+        String s = DigestUtils.Md5("admin", "admin");
+        System.out.println(s);
+
     }
 
 
