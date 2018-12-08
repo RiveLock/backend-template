@@ -3,6 +3,8 @@
 
     <!--<property name="logFile" value="f:/data/logs/template/demo.log"/>-->
 
+    <springProperty scope="context" name="logPath" source="logging.path"/>
+
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${logPath}/demo.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">

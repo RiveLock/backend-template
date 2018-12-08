@@ -4,7 +4,7 @@
 # 技术点：
 - SpringBoot -- 2.1.0
 - Mysql -- 5.7.0
-- Lombok -- 1.8.4
+- Lombok -- 1.18.4
 - Logback 
 - Swagger2 -- 2.8.0
 - Alibaba Druid --  1.0.28
