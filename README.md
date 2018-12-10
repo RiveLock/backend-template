@@ -3,6 +3,7 @@
 
 # 技术点：
 - SpringBoot -- 2.1.0
+- SpringBoot Admin -- 2.1.1
 - Mysql -- 5.7.0
 - Lombok -- 1.18.4
 - Logback 
