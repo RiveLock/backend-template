@@ -1,6 +1,6 @@
 package com.template.filter;
 
-import com.template.base.domain.TemplateMember;
+import com.template.base.domain.User;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -29,9 +29,9 @@ public class UserFormAuthenticationFilter extends FormAuthenticationFilter {
             // 查看session属性当前是否是空的
             if (session.getAttribute("loginName") == null) {
                 // 如果是空的才初始化
-                TemplateMember member = (TemplateMember)subject.getPrincipal();
+                User user = (User)subject.getPrincipal();
                 //存入用户数据
-                session.setAttribute("loginName", member.getLoginName());
+                session.setAttribute("loginName", user.getLoginName());
             }
         }
 

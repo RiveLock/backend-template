@@ -1,61 +1,59 @@
 package com.template.base.dao.impl;
 
-
-import com.template.base.dao.TemplateMemberDao;
-import com.template.base.domain.TemplateMember;
-import com.template.base.domain.base.BaseTemplateMember;
-import com.template.base.domain.criteria.TemplateMemberCriteria;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
+import com.template.base.dao.PermissionDao;
+import com.template.base.domain.Permission;
+import com.template.base.domain.base.BasePermission;
+import com.template.base.domain.criteria.PermissionCriteria;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Resource;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Component;
 
-@Component("templateMemberDao")
-public class TemplateMemberDaoImpl implements TemplateMemberDao {
-    private static final String NAMESPACE = "com.template.base.dao.impl.TemplateMemberDaoImpl.";
+@Component("permissionDao")
+public class PermissionDaoImpl implements PermissionDao {
+    private static final String NAMESPACE = "com.template.base.dao.impl.PermissionDaoImpl.";
 
     @Resource
     private SqlSessionTemplate sqlSessionTemplate;
 
-    public int insert(BaseTemplateMember record) {
+    public int insert(BasePermission record) {
         return sqlSessionTemplate.insert(NAMESPACE + "insert", record);
     }
 
-    public TemplateMember selectOne(Long pk) {
+    public Permission selectOne(Integer pk) {
         return sqlSessionTemplate.selectOne(NAMESPACE + "selectByPk", pk);
     }
 
-    public TemplateMember selectOne(TemplateMemberCriteria criteria) {
+    public Permission selectOne(PermissionCriteria criteria) {
         return sqlSessionTemplate.selectOne(NAMESPACE + "selectByCriteria", criteria);
     }
 
-    public List<TemplateMember> selectList(TemplateMemberCriteria criteria) {
+    public List<Permission> selectList(PermissionCriteria criteria) {
         return sqlSessionTemplate.selectList(NAMESPACE + "selectList", criteria);
     }
 
-    public int count(TemplateMemberCriteria criteria) {
+    public int count(PermissionCriteria criteria) {
         return sqlSessionTemplate.selectOne(NAMESPACE + "count", criteria);
     }
 
-    public int update(BaseTemplateMember record) {
+    public int update(BasePermission record) {
         return sqlSessionTemplate.update(NAMESPACE + "updateByPk", record);
     }
 
-    public int update(BaseTemplateMember record, TemplateMemberCriteria criteria) {
+    public int update(BasePermission record, PermissionCriteria criteria) {
         Map<String, Object> param = new HashMap<>();
         param.put("record", record);
         param.put("criteria", criteria);
         return sqlSessionTemplate.update(NAMESPACE + "updateByCriteria", param);
     }
 
-    public int delete(Long pk) {
+    public int delete(Integer pk) {
         return sqlSessionTemplate.delete(NAMESPACE + "deleteByPk", pk);
     }
 
-    public int delete(TemplateMemberCriteria criteria) {
+    public int delete(PermissionCriteria criteria) {
         return sqlSessionTemplate.delete(NAMESPACE + "deleteByCriteria", criteria);
     }
 }

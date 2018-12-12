@@ -4,9 +4,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/template?characterEncoding=utf-8&autoReconnect=true&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://47.98.104.146:3306/template?characterEncoding=utf-8&autoReconnect=true&useSSL=false
     username: root
-    password: root
+    password: 123456
     max-active: 50
     initial-size: 10
     max-wait: 60000
@@ -25,7 +25,7 @@ spring:
 
   #redis配置
   redis:
-    host: 172.16.1.160
+    host: 47.98.104.146
     port: 6379 #默认端口为6379
     database: 0 #默认为0
 

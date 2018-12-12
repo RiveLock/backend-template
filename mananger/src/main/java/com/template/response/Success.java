@@ -10,7 +10,9 @@ package com.template.response;
 public enum Success {
 
     USER_LOGIN_SUCCESS("Success_001","login success"),
-    USER_REGISTER_SUCCESS("Success_002","register success"),;
+    USER_REGISTER_SUCCESS("Success_002","register success"),
+    LOGOUT_SUCCESS("Success_003","logout success")
+    ;
 
     public final String code;
     public final String description;

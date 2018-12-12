@@ -13,8 +13,8 @@
 - XXL-Job
 - MongoDB
 - Shiro -- 1.4.0
-- Mybatis 1.3.2
-- Redis
+- Mybatis --  1.3.2
+- Redis -- 5.0.0
 - Memcached
 - Solr
 - Elasticsearch
