@@ -8,16 +8,13 @@ import com.template.base.dto.UserDto;
 import com.template.response.Error;
 import com.template.response.ResultData;
 import com.template.response.Success;
+import com.template.service.LoginService;
 import com.template.utils.DateUtils;
 import com.template.utils.DigestUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -25,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.constraints.NotNull;
-import java.util.Map;
 
 /**
  * Created jixinshi on 2018-11-27.
@@ -40,6 +36,9 @@ public class LoginController {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private LoginService loginService;
+
 
     /**
      * 登陆
@@ -49,47 +48,7 @@ public class LoginController {
     @ApiOperation(value = "登陆用户")
     @PostMapping(value = "/login")
     public ResultData loginUser(@RequestBody @NotNull UserDto userDto){
-        Map<String,Object> data = new HashedMap();
-
-        if (StringUtils.isEmpty(userDto.getLoginName())){
-            return ResultData.error(Error.USER_NOT_LOGIN_NULL.code,Error.USER_NOT_LOGIN_NULL.description);
-        }
-
-        if (StringUtils.isEmpty(userDto.getLoginPassword())){
-            return ResultData.error(Error.USER_NOT_PASSWORD_NULL.code,Error.USER_NOT_PASSWORD_NULL.description);
-        }
-
-        // 使用 shiro 进行登录
-        Subject subject = SecurityUtils.getSubject();
-
-        String userName = userDto.getLoginName().trim();
-        String password = userDto.getLoginPassword().trim();
-        String rememberMe = userDto.getRememberMe();
-
-        //获取token
-        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
-
-        // 设置 remenmberMe 的功能
-        if (rememberMe != null && rememberMe.equals("on")) {
-            token.setRememberMe(true);
-        }
-        try{
-            subject.login(token);
-
-            // 登录成功
-            User user = (User) subject.getPrincipal();
-            data.put("token",user.getLoginName());
-            log.info(userName+"登入系统");
-
-            return ResultData.success(Success.USER_LOGIN_SUCCESS.code,Success.USER_LOGIN_SUCCESS.description).with(data);
-        }catch (UnknownAccountException e) {
-            log.error(userName+"账号不存在");
-            return ResultData.error(Error.USERNAME_NOT_EXIST.code,Error.USERNAME_NOT_EXIST.description);
-        }catch (AuthenticationException e){
-            log.error(userName+"密码错误");
-            return ResultData.error(Error.USER_PASSWORD_FAIL.code,Error.USER_PASSWORD_FAIL.description);
-        }
-
+        return loginService.loginUser(userDto);
     }
 
     /**
@@ -152,7 +111,7 @@ public class LoginController {
             return "new password is empty!";
         }
 
-        User user = userDao.selectOne(UserCriteria.loginNameEqualTo(userDto.getLoginName()).setLimit(1L));
+        /*User user = userDao.selectOne(UserCriteria.loginNameEqualTo(userDto.getLoginName()).setLimit(1L));
         if (user == null){
             return "login name is  exist!";
         }
@@ -162,9 +121,9 @@ public class LoginController {
         }
 
         user.setLoginPassword(userDto.getNewPassword());
-        user.setUpdateTime(DateUtils.getCurrentDate());
+        user.setUpdateTime(DateUtils.getCurrentDate());*/
 
-        userDao.update(user);
+        //userDao.update(user);
 
         return "motify password success";
     }
