@@ -14,7 +14,10 @@ public enum Success {
     LOGOUT_SUCCESS("Success_003","logout success!"),
     PERM_ADD_SUCCESS("Success_004","perm add success!"),
     PERM_UPDATE_SUCCESS("Success_005","perm update success!"),
-    PERM_DELETE_SUCCESS("Success_006","perm delete success!")
+    PERM_DELETE_SUCCESS("Success_006","perm delete success!"),
+    ROLE_ADD_SUCCESS("Success_007","role add success!"),
+    ROLE_UPDATE_SUCCESS("Success_008","role update success!"),
+    ROLE_DELETE_SUCCESS("Success_009","role delete success!")
 
     ;
 
