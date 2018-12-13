@@ -1,6 +1,8 @@
 package com.template.service;
 
+import com.template.base.domain.User;
 import com.template.response.PageDataResult;
+import com.template.response.ResultData;
 
 /**
  * @Title: UserService
@@ -11,6 +13,12 @@ import com.template.response.PageDataResult;
  */
 public interface UserService {
 
-    PageDataResult getUserList(Integer pageNum,Integer pageSize);
+    PageDataResult getUserList(Integer pageNum,Integer ageSize);
+
+    ResultData addUser(User user);
+
+    ResultData updateUser(User user);
+
+    ResultData delUser(Long id);
 
 }

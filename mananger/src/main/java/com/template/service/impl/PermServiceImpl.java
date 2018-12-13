@@ -114,7 +114,7 @@ public class PermServiceImpl implements PermService {
                 return ResultData.fail(Fail.PERM_DELETE_FAIL.code,Fail.PERM_DELETE_FAIL.description);
             }
             log.info("权限[删除]，结果=删除成功！");
-            return ResultData.success(Success.PERM_DELETE_SUCCESS.code,Success.PERM_DELETE_SUCCESS.description);
+            return ResultData.success(Success.PERM_UPDATE_SUCCESS.code,Success.PERM_UPDATE_SUCCESS.description);
         }catch (Exception e) {
             e.printStackTrace();
             log.error("权限[删除]异常！", e);

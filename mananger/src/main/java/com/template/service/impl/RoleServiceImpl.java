@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Title: RoleServiceImpl
@@ -57,7 +59,7 @@ public class RoleServiceImpl implements RoleService {
 
             if(!StringUtils.isEmpty(permissions)){
                 String[] ids = permissions.split(",");
-              List<String> p = new ArrayList <>();
+                List<String> p = new ArrayList <>();
                 for(String id: ids){
                     Permission permission = permissionDao.selectOne(Integer.parseInt(id));
                     String name = permission.getName();
@@ -127,5 +129,13 @@ public class RoleServiceImpl implements RoleService {
             log.error("角色[新增]异常！", e);
             return ResultData.fail(Fail.SYSTEM_FAIL.code,Fail.SYSTEM_FAIL.description);
         }
+    }
+
+    @Override
+    public ResultData getRoles() {
+        Map<String,Object> data = new HashMap();
+        List <Role> roles = roleDao.selectList(RoleCriteria.idIsNotNull());
+        data.put("roles",roles);
+        return ResultData.success("","").with(data);
     }
 }

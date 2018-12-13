@@ -1,6 +1,6 @@
 package com.template.service;
 
-import com.template.base.dto.UserDto;
+import com.template.base.dto.LoginDto;
 import com.template.response.ResultData;
 
 /**
@@ -11,5 +11,5 @@ import com.template.response.ResultData;
  * @date: 2018/12/12 19:07
  */
 public interface LoginService {
-    ResultData loginUser(UserDto userDto);
+    ResultData loginUser(LoginDto userDto);
 }

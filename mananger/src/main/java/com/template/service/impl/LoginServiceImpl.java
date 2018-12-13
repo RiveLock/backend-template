@@ -2,7 +2,7 @@ package com.template.service.impl;
 
 import com.template.base.dao.UserDao;
 import com.template.base.domain.User;
-import com.template.base.dto.UserDto;
+import com.template.base.dto.LoginDto;
 import com.template.response.Fail;
 import com.template.response.ResultData;
 import com.template.response.Success;
@@ -34,7 +34,7 @@ public class LoginServiceImpl implements LoginService {
     private UserDao userDao;
 
     @Override
-    public ResultData loginUser(UserDto userDto) {
+    public ResultData loginUser(LoginDto userDto) {
         Map<String,Object> data = new HashedMap();
 
         if (StringUtils.isEmpty(userDto.getLoginName())){

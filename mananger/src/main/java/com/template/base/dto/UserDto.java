@@ -1,5 +1,6 @@
 package com.template.base.dto;
 
+import com.template.base.domain.User;
 import lombok.Data;
 
 /**
@@ -7,18 +8,9 @@ import lombok.Data;
  * @Description:
  * @author: youqing
  * @version: 1.0
- * @date: 2018/12/11 18:16
+ * @date: 2018/12/13 15:18
  */
 @Data
-public class UserDto {
-
-    protected String loginName;
-
-    protected String loginPassword;
-
-    protected String userName;
-
-    private String newPassword;
-
-    private String rememberMe;
+public class UserDto extends User {
+    private String roleName;
 }

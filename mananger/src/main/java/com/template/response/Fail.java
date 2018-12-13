@@ -20,7 +20,10 @@ public enum Fail {
     PERM_DELETE_FAIL("Fail_009","perm delete fail!"),
     ROLE_ADD_FAIL("Fail_010","role add fail!"),
     ROLE_UPDATE_FAIL("Fail_011","role update fail!"),
-    ROLE_DELETE_FAIL("Fail_012","role delete fail!")
+    ROLE_DELETE_FAIL("Fail_012","role delete fail!"),
+    USER_LOGINNAME_ERROR("Fail_013","loginName is Excited!"),
+    USER_UPDATE_FAIL("Fail_014","user update fail!"),
+    USER_DELETE_FAIL("Fail_015","user delete fail!"),
     ;
 
     public final String code;

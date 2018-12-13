@@ -9,6 +9,8 @@ public abstract class BaseUser {
 
     protected String loginPassword;
 
+    protected Integer roleId;
+
     protected String userName;
 
     protected String createTime;
@@ -39,6 +41,14 @@ public abstract class BaseUser {
 
     public void setLoginPassword(String loginPassword) {
         this.loginPassword = loginPassword;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public String getUserName() {
@@ -81,6 +91,7 @@ public abstract class BaseUser {
         sb.append("id=").append(id);
         sb.append(", loginName=").append(loginName);
         sb.append(", loginPassword=").append(loginPassword);
+        sb.append(", roleId=").append(roleId);
         sb.append(", userName=").append(userName);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);

@@ -4,7 +4,7 @@ package com.template.controller;
 import com.template.base.dao.UserDao;
 import com.template.base.domain.User;
 import com.template.base.domain.criteria.UserCriteria;
-import com.template.base.dto.UserDto;
+import com.template.base.dto.LoginDto;
 import com.template.response.Fail;
 import com.template.response.ResultData;
 import com.template.response.Success;
@@ -47,7 +47,7 @@ public class LoginController {
      */
     @ApiOperation(value = "登陆用户")
     @PostMapping(value = "/login")
-    public ResultData loginUser(@RequestBody @NotNull UserDto userDto){
+    public ResultData loginUser(@RequestBody @NotNull LoginDto userDto){
         return loginService.loginUser(userDto);
     }
 
@@ -58,7 +58,7 @@ public class LoginController {
      */
     @ApiOperation(value = "添加用户")
     @PostMapping(value = "/add/user")
-    public ResultData addUser(@RequestBody @NotNull UserDto userDto){
+    public ResultData addUser(@RequestBody @NotNull LoginDto userDto){
 
         if (StringUtils.isEmpty(userDto.getLoginName())){
             return ResultData.fail(Fail.USER_NOT_LOGIN_NULL.code, Fail.USER_NOT_LOGIN_NULL.description);
@@ -97,7 +97,7 @@ public class LoginController {
      */
     @ApiOperation(value = "修改用户")
     @PostMapping(value = "/motify/user")
-    public String motifyUser(@RequestBody @NotNull UserDto userDto){
+    public String motifyUser(@RequestBody @NotNull LoginDto userDto){
 
         if (StringUtils.isEmpty(userDto.getLoginName())){
             return "login name is empty!";

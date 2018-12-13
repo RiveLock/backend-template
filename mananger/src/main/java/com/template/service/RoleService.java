@@ -4,6 +4,8 @@ import com.template.base.domain.Role;
 import com.template.response.PageDataResult;
 import com.template.response.ResultData;
 
+import java.util.List;
+
 /**
  * @Title: RoleService
  * @Description:
@@ -14,6 +16,8 @@ import com.template.response.ResultData;
 public interface RoleService {
 
     PageDataResult getRoleList(Integer pageNum, Integer pageSize);
+
+    ResultData getRoles();
 
     ResultData updateRole(Role role);
 

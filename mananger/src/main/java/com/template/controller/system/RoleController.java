@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * @Title: RoleController
@@ -27,7 +29,16 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    @ApiOperation(value = "获取角色列表")
+    /**
+     *
+     * 功能描述: 分页获取角色列表
+     *
+     * @param:
+     * @return:
+     * @auther: youqing
+     * @date: 2018/12/13 14:47
+     */
+    @ApiOperation(value = "分页获取角色列表")
     @PostMapping("getRoleList")
     @ResponseBody
     public PageDataResult getRoleList(@RequestParam("pageNum") Integer pageNum,
@@ -49,6 +60,22 @@ public class RoleController {
             log.error("角色列表查询异常！", e);
         }
         return pdr;
+    }
+
+
+    /**
+     *
+     * 功能描述: 获取角色列表
+     *
+     * @param:
+     * @return:
+     * @auther: youqing
+     * @date: 2018/12/13 14:47
+     */
+    @GetMapping("getRoles")
+    public ResultData getRoles(){
+        log.info("获取角色列表");
+        return roleService.getRoles();
     }
 
 

@@ -1,12 +1,15 @@
 package com.template.controller.system;
 
+import com.template.base.domain.User;
 import com.template.response.PageDataResult;
+import com.template.response.ResultData;
 import com.template.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 
 /**
@@ -38,8 +41,6 @@ public class UserController {
     @PostMapping("getUserList")
     public PageDataResult getUserList(@RequestParam("pageNum") Integer pageNum,
                                       @RequestParam("pageSize") Integer pageSize ) {
-        /*logger.info("分页查询用户列表！搜索条件：userSearch：" + userSearch + ",pageNum:" + page.getPageNum()
-                + ",每页记录数量pageSize:" + page.getPageSize());*/
         PageDataResult pdr = new PageDataResult();
         try {
             if(null == pageNum) {
@@ -56,6 +57,40 @@ public class UserController {
             log.error("用户列表查询异常！", e);
         }
         return pdr;
+    }
+
+    /**
+     *
+     * 功能描述: 设置用户[新增或更新]
+     *
+     * @param:
+     * @return:
+     * @auther: youqing
+     * @date: 2018/12/13 13:34
+     */
+    @ApiOperation(value = "设置用户[新增或更新]")
+    @PostMapping("setUser")
+    public ResultData setUser(User user) {
+        log.info("设置用户[新增或更新]！user:" + user);
+        ResultData resultData = new ResultData();
+        if(user.getId() == null){
+            //新增
+            resultData = userService.addUser(user);
+        }else{
+            //修改
+            resultData = userService.updateUser(user);
+        }
+        return resultData;
+    }
+
+    @ApiOperation(value = "删除用户")
+    @PostMapping("delUser")
+    public ResultData delUser(@RequestParam("id") Long id) {
+        log.info("删除用户！id:" + id);
+        ResultData resultData = new ResultData();
+        //删除权限
+        resultData = userService.delUser(id);
+        return resultData;
     }
 
 }
