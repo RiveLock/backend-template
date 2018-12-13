@@ -59,7 +59,7 @@ public class ResultData implements Serializable {
      *
      * @return
      */
-    public static ResultData error(String statusCode,String message) {
+    public static ResultData fail(String statusCode,String message) {
         Head head = new Head(400, statusCode,message);
         ResultData resultData = new ResultData(head);
         return resultData;

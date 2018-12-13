@@ -5,7 +5,7 @@ import com.template.base.dao.UserDao;
 import com.template.base.domain.User;
 import com.template.base.domain.criteria.UserCriteria;
 import com.template.base.dto.UserDto;
-import com.template.response.Error;
+import com.template.response.Fail;
 import com.template.response.ResultData;
 import com.template.response.Success;
 import com.template.service.LoginService;
@@ -26,7 +26,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created jixinshi on 2018-11-27.
  */
-@Api("用户信息接口")
+@Api(description = "登入接口")
 @RequestMapping("mananger")
 @RestController
 @Slf4j
@@ -61,16 +61,16 @@ public class LoginController {
     public ResultData addUser(@RequestBody @NotNull UserDto userDto){
 
         if (StringUtils.isEmpty(userDto.getLoginName())){
-            return ResultData.error(Error.USER_NOT_LOGIN_NULL.code,Error.USER_NOT_LOGIN_NULL.description);
+            return ResultData.fail(Fail.USER_NOT_LOGIN_NULL.code, Fail.USER_NOT_LOGIN_NULL.description);
         }
 
         if (StringUtils.isEmpty(userDto.getLoginPassword())){
-            return ResultData.error(Error.USER_NOT_PASSWORD_NULL.code,Error.USER_NOT_PASSWORD_NULL.description);
+            return ResultData.fail(Fail.USER_NOT_PASSWORD_NULL.code, Fail.USER_NOT_PASSWORD_NULL.description);
         }
 
         User user = userDao.selectOne(UserCriteria.loginNameEqualTo(userDto.getLoginName()).setLimit(1L));
         if (user != null){
-            return ResultData.error(Error.USERNAME_EXIST.code,Error.USERNAME_EXIST.description);
+            return ResultData.fail(Fail.USERNAME_EXIST.code, Fail.USERNAME_EXIST.description);
         }
         //加密
         String loginPassword = userDto.getLoginPassword();
@@ -84,7 +84,7 @@ public class LoginController {
 
         int result = userDao.insert(user);
         if(result == 0 ){
-            return ResultData.error(Error.USER_REGISTER_FAIL.code,Error.USER_REGISTER_FAIL.description);
+            return ResultData.fail(Fail.USER_REGISTER_FAIL.code, Fail.USER_REGISTER_FAIL.description);
         }
 
         return ResultData.success(Success.USER_REGISTER_SUCCESS.code,Success.USER_REGISTER_SUCCESS.description);

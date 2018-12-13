@@ -2,6 +2,7 @@ package com.template.service;
 
 import com.template.base.domain.Permission;
 import com.template.response.PageDataResult;
+import com.template.response.ResultData;
 
 import java.util.List;
 
@@ -17,4 +18,10 @@ public interface PermService {
     PageDataResult getPermissionList(Integer pageNum, Integer pageSize);
 
     List<Permission> parentPermissionList();
+
+    ResultData addPermission(Permission permission);
+
+    ResultData updatePermission(Permission permission);
+
+    ResultData del(Integer id);
 }

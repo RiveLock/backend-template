@@ -2,6 +2,8 @@ package com.template.controller.system;
 
 import com.template.response.PageDataResult;
 import com.template.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,11 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @Title: UserController
- * @Description:
+ * @Description: 用户管理
  * @author: youqing
  * @version: 1.0
  * @date: 2018/12/12 16:53
  */
+@Api(description = "用户管理接口")
 @RestController
 @RequestMapping("user")
 @Slf4j
@@ -22,6 +25,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     *
+     * 功能描述: 获取用户列表
+     *
+     * @param:
+     * @return:
+     * @auther: youqing
+     * @date: 2018/12/13 9:45
+     */
+    @ApiOperation(value = "获取用户列表")
     @PostMapping("getUserList")
     public PageDataResult getUserList(@RequestParam("pageNum") Integer pageNum,
                                       @RequestParam("pageSize") Integer pageSize ) {

@@ -3,7 +3,7 @@ package com.template.service.impl;
 import com.template.base.dao.UserDao;
 import com.template.base.domain.User;
 import com.template.base.dto.UserDto;
-import com.template.response.Error;
+import com.template.response.Fail;
 import com.template.response.ResultData;
 import com.template.response.Success;
 import com.template.service.LoginService;
@@ -38,11 +38,11 @@ public class LoginServiceImpl implements LoginService {
         Map<String,Object> data = new HashedMap();
 
         if (StringUtils.isEmpty(userDto.getLoginName())){
-            return ResultData.error(Error.USER_NOT_LOGIN_NULL.code,Error.USER_NOT_LOGIN_NULL.description);
+            return ResultData.fail(Fail.USER_NOT_LOGIN_NULL.code, Fail.USER_NOT_LOGIN_NULL.description);
         }
 
         if (StringUtils.isEmpty(userDto.getLoginPassword())){
-            return ResultData.error(Error.USER_NOT_PASSWORD_NULL.code,Error.USER_NOT_PASSWORD_NULL.description);
+            return ResultData.fail(Fail.USER_NOT_PASSWORD_NULL.code, Fail.USER_NOT_PASSWORD_NULL.description);
         }
 
         // 使用 shiro 进行登录
@@ -65,10 +65,10 @@ public class LoginServiceImpl implements LoginService {
             return ResultData.success(Success.USER_LOGIN_SUCCESS.code,Success.USER_LOGIN_SUCCESS.description).with(data);
         }catch (UnknownAccountException e) {
             log.error(userName+"账号不存在");
-            return ResultData.error(Error.USERNAME_NOT_EXIST.code,Error.USERNAME_NOT_EXIST.description);
+            return ResultData.fail(Fail.USERNAME_NOT_EXIST.code, Fail.USERNAME_NOT_EXIST.description);
         }catch (AuthenticationException e){
             log.error(userName+"密码错误");
-            return ResultData.error(Error.USER_PASSWORD_FAIL.code,Error.USER_PASSWORD_FAIL.description);
+            return ResultData.fail(Fail.USER_PASSWORD_FAIL.code, Fail.USER_PASSWORD_FAIL.description);
         }
     }
 }
