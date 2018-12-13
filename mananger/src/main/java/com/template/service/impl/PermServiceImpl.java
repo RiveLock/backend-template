@@ -2,6 +2,8 @@ package com.template.service.impl;
 
 import com.template.base.dao.PermissionDao;
 import com.template.base.domain.Permission;
+import com.template.base.domain.Role;
+import com.template.base.domain.User;
 import com.template.base.domain.criteria.PermissionCriteria;
 import com.template.base.dto.PermDto;
 import com.template.response.Fail;
@@ -121,4 +123,5 @@ public class PermServiceImpl implements PermService {
             return ResultData.fail(Fail.SYSTEM_FAIL.code,Fail.SYSTEM_FAIL.description);
         }
     }
+
 }

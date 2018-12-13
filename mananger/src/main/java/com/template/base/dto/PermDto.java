@@ -2,6 +2,8 @@ package com.template.base.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Title: PermDto
  * @Description:
@@ -28,4 +30,7 @@ public class PermDto {
     private String updateTime;
 
     private Integer delFlag;
+
+    List<PermDto> childrens;
+
 }

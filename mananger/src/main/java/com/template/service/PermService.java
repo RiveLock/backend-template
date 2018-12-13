@@ -1,6 +1,7 @@
 package com.template.service;
 
 import com.template.base.domain.Permission;
+import com.template.base.domain.User;
 import com.template.response.PageDataResult;
 import com.template.response.ResultData;
 

@@ -1,5 +1,6 @@
 package com.template.service;
 
+import com.template.base.domain.User;
 import com.template.base.dto.LoginDto;
 import com.template.response.ResultData;
 
@@ -12,4 +13,6 @@ import com.template.response.ResultData;
  */
 public interface LoginService {
     ResultData loginUser(LoginDto userDto);
+
+    ResultData getUserPerms(User user);
 }

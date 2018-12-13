@@ -1,17 +1,21 @@
 package com.template.controller.system;
 
 import com.template.base.domain.Permission;
+import com.template.base.domain.User;
 import com.template.response.PageDataResult;
 import com.template.response.ResultData;
 import com.template.service.PermService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Title: PermController
@@ -124,5 +128,7 @@ public class PermController {
         resultData = permService.del(id);
         return resultData;
     }
+
+
 
 }

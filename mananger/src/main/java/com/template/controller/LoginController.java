@@ -90,6 +90,28 @@ public class LoginController {
         return ResultData.success(Success.USER_REGISTER_SUCCESS.code,Success.USER_REGISTER_SUCCESS.description);
     }
 
+
+    /**
+     *
+     * 功能描述: 获取登陆用户的权限
+     *
+     * @param:
+     * @return:
+     * @auther: youqing
+     * @date: 2018/12/4 9:48
+     */
+    @GetMapping("getUserPerms")
+    public ResultData getUserPerms(){
+        log.info("获取登陆用户的权限");
+        ResultData resultData = new ResultData();
+        User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+        System.out.println(user);
+        resultData = loginService.getUserPerms(user);
+        return resultData;
+    }
+
+
+
     /**
      * 修改
      * @param userDto
