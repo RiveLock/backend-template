@@ -24,6 +24,7 @@ public enum Fail {
     USER_LOGINNAME_ERROR("Fail_013","loginName is Excited!"),
     USER_UPDATE_FAIL("Fail_014","user update fail!"),
     USER_DELETE_FAIL("Fail_015","user delete fail!"),
+    USER_NOT_LOGIN("Fail_016","user not logged in!")
     ;
 
     public final String code;

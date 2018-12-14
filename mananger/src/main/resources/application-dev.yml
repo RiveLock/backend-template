@@ -29,4 +29,8 @@ spring:
     port: 6379 #默认端口为6379
     database: 0 #默认为0
 
+spring.redis.shiro.host: 47.98.104.146
+spring.redis.shiro.port: 6379
+spring.redis.shiro.timeout: 5000
+
 

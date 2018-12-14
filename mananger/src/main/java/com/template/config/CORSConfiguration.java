@@ -2,7 +2,7 @@ package com.template.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * @Title: CORSConfiguration
@@ -12,10 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date: 2018/12/4 16:39
  */
 @Configuration
-public class CORSConfiguration implements WebMvcConfigurer{
+public class CORSConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*")
+        registry.addMapping("/**")
+                .allowedOrigins("*")
                 .allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowCredentials(false).maxAge(3600);
     }

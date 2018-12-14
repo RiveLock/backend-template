@@ -5,6 +5,7 @@ import com.template.base.dao.UserDao;
 import com.template.base.domain.User;
 import com.template.base.domain.criteria.UserCriteria;
 import com.template.base.dto.LoginDto;
+import com.template.redis.RedisService;
 import com.template.response.Fail;
 import com.template.response.ResultData;
 import com.template.response.Success;
@@ -21,7 +22,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created jixinshi on 2018-11-27.
@@ -38,6 +42,9 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private RedisService redisService;
 
 
     /**
@@ -100,13 +107,17 @@ public class LoginController {
      * @auther: youqing
      * @date: 2018/12/4 9:48
      */
+    @ApiOperation(value = "获取登陆用户的权限")
     @GetMapping("getUserPerms")
-    public ResultData getUserPerms(){
+    public ResultData getUserPerms(HttpServletRequest request){
         log.info("获取登陆用户的权限");
         ResultData resultData = new ResultData();
-        User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
-        System.out.println(user);
-        resultData = loginService.getUserPerms(user);
+        String token = request.getHeader("token");
+        if(StringUtils.isEmpty(token)){
+            return ResultData.fail(Fail.USER_NOT_LOGIN.code,Fail.USER_NOT_LOGIN.description);
+        }
+        Long userId = (Long) redisService.get(token);
+        resultData = loginService.getUserPerms(userId);
         return resultData;
     }
 
@@ -161,11 +172,32 @@ public class LoginController {
      */
     @ApiOperation(value = "退出系统")
     @GetMapping("logout")
-    public ResultData logout(){
+    public ResultData logout(HttpServletRequest request){
         log.info("退出系统");
+        String token = request.getHeader("token");
+        if(StringUtils.isEmpty(token)){
+            return ResultData.fail(Fail.USER_NOT_LOGIN.code,Fail.USER_NOT_LOGIN.description);
+        }
+        redisService.delete(token);
         Subject subject = SecurityUtils.getSubject();
         subject.logout(); // shiro底层删除session的会话信息
         return ResultData.success(Success.LOGOUT_SUCCESS.code,Success.LOGOUT_SUCCESS.description);
+    }
+
+    /**
+     *
+     * 功能描述: 未登录，shiro应重定向到登录界面，此处返回未登录状态信息由前端控制跳转页面
+     *
+     * @param:
+     * @return:
+     * @auther: youqing
+     * @date: 2018/12/14 9:50
+     */
+    @ApiOperation(value = "未登录")
+    @GetMapping("unauth")
+    public ResultData unauth() {
+        log.error("未登录");
+        return ResultData.fail(Fail.USER_NOT_LOGIN.code,Fail.USER_NOT_LOGIN.description);
     }
 
 }

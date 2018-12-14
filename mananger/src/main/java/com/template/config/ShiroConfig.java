@@ -5,9 +5,7 @@ import com.template.filter.UserFormAuthenticationFilter;
 import com.template.shiro.MyRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,6 +24,8 @@ import java.util.Map;
 public class ShiroConfig {
 
 
+
+
     /**
      * 1.创建ShiroFilterFactoryBean
      */
@@ -37,10 +37,21 @@ public class ShiroConfig {
 
         Map<String, String> filterMap = new LinkedHashMap<>();
 
+        //放行登录口和退出系统的接口
+        filterMap.put("/mananger/login", "anon");
+        filterMap.put("/mananger/logout", "anon");
+        /*放行swagger*/
+        filterMap.put("/swagger-ui.html", "anon");
+        filterMap.put("/swagger-resources", "anon");
+        filterMap.put("/v2/api-docs", "anon");
+        filterMap.put("/webjars/springfox-swagger-ui/**", "anon");
+
+        bean.setLoginUrl("/mananger/unauth");
 
         // 把自定义Filter添加到shiro过滤器列表
         Map<String, Filter> filters = new LinkedHashMap<>();
         filters.put("userFilter", userFormAuthenticationFilter());
+
         bean.setFilters(filters);
 
         // 添加 shiro 过滤器
@@ -59,40 +70,16 @@ public class ShiroConfig {
      * 2.创建SecurityManager
      */
     @Bean
-    public DefaultWebSecurityManager defaultWebSecurityManager(MyRealm realm,
-                                                               CookieRememberMeManager rememberMeManager) {
+    public DefaultWebSecurityManager defaultWebSecurityManager() {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
 
         // 关联realm
-        manager.setRealm(realm);
-
-        // 关联 rememberMeManager
-        manager.setRememberMeManager(rememberMeManager);
+        manager.setRealm(myReal());
 
         return manager;
     }
 
-    // 创建 CookieRememberMeManager
-    @Bean
-    public CookieRememberMeManager cookieRememberMeManager(SimpleCookie cookie) {
-        CookieRememberMeManager manager = new CookieRememberMeManager();
-        manager.setCookie(cookie);
-        return manager;
-    }
 
-    /**
-     * RememberMe 的功能
-     */
-    // 创建 Cookie
-    @Bean
-    public SimpleCookie simpleCookie() {
-        SimpleCookie cookie = new SimpleCookie("rememberMe");
-        // 设置 cookie 的时间长度
-        cookie.setMaxAge(120);
-        // 设置只读模型
-        cookie.setHttpOnly(true);
-        return cookie;
-    }
 
     /**
      * 3.创建 Realm
@@ -118,5 +105,7 @@ public class ShiroConfig {
         hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
         return hashedCredentialsMatcher;
     }
+
+
 
 }

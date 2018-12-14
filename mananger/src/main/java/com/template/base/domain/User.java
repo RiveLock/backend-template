@@ -2,5 +2,7 @@ package com.template.base.domain;
 
 import com.template.base.domain.base.BaseUser;
 
-public class User extends BaseUser {
+import java.io.Serializable;
+
+public class User extends BaseUser implements Serializable{
 }

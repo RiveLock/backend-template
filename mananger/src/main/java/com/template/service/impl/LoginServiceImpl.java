@@ -7,8 +7,10 @@ import com.template.base.domain.Permission;
 import com.template.base.domain.Role;
 import com.template.base.domain.User;
 import com.template.base.domain.criteria.PermissionCriteria;
+import com.template.base.domain.criteria.UserCriteria;
 import com.template.base.dto.LoginDto;
 import com.template.base.dto.PermDto;
+import com.template.redis.RedisService;
 import com.template.response.Fail;
 import com.template.response.ResultData;
 import com.template.response.Success;
@@ -49,6 +51,9 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private PermissionDao permissionDao;
 
+    @Autowired
+    private RedisService redisService;
+
     @Override
     public ResultData loginUser(LoginDto userDto) {
         Map<String,Object> data = new HashedMap();
@@ -74,7 +79,11 @@ public class LoginServiceImpl implements LoginService {
             subject.login(token);
             // 登录成功
             User user = (User) subject.getPrincipal();
-            //data.put("token",user);
+            System.out.println(subject.getSession().getId());
+            //保存到redis
+            redisService.set((String) subject.getSession().getId(),user.getId());
+            //设置token
+            data.put("token",subject.getSession().getId());
             log.info(userName+"登入系统");
 
             return ResultData.success(Success.USER_LOGIN_SUCCESS.code,Success.USER_LOGIN_SUCCESS.description).with(data);
@@ -89,10 +98,11 @@ public class LoginServiceImpl implements LoginService {
 
 
     @Override
-    public ResultData getUserPerms(User user) {
+    public ResultData getUserPerms(Long userId) {
         Map<String, Object> data = new HashMap<>();
-        //Integer roleId = user.getRoleId();
-        Role role = roleDao.selectOne(1);
+        User user = userDao.selectOne(userId);
+        Integer roleId = user.getRoleId();
+        Role role = roleDao.selectOne(roleId);
         if (null != role ) {
             String permissions = role.getPermissions();
 

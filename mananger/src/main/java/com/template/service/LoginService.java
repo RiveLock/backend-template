@@ -14,5 +14,5 @@ import com.template.response.ResultData;
 public interface LoginService {
     ResultData loginUser(LoginDto userDto);
 
-    ResultData getUserPerms(User user);
+    ResultData getUserPerms(Long userId);
 }
