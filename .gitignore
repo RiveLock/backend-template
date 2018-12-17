@@ -44,6 +44,7 @@ tmp/
 .project
 .classpath
 .loadpath
+target
 /target/
 
 
