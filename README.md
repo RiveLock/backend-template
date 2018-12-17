@@ -3,6 +3,7 @@
 
 # 技术点：
 - SpringBoot -- 2.1.0
+- SpringBoot Admin -- 2.1.1
 - Mysql -- 5.7.0
 - Lombok -- 1.18.4
 - Logback 
@@ -12,8 +13,8 @@
 - XXL-Job
 - MongoDB
 - Shiro -- 1.4.0
-- Mybatis 1.3.2
-- Redis
+- Mybatis --  1.3.2
+- Redis -- 5.0.0
 - Memcached
 - Solr
 - Elasticsearch
